@@ -1,0 +1,136 @@
+{% extends 'shop/basic.html' %}
+
+
+{% block title %}Product search Page {% endblock %}
+{% block css%}
+<style>
+        .col-md-3 {
+            display: inline-block;
+            margin-left: -4px;
+        }
+        
+        .col-md-3 img{
+            max-width: 255px;
+            height: 255px
+        }
+
+
+        body .carousel-control-indicator li {
+            background-color: blue;
+        }
+
+        body .carousel-control-prev-icon body .carousel-control-next-icon {
+            background-color: blue;
+        }
+
+        body .no-padding {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .carousel-control-prev-icon {
+            background: black no-repeat center center;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+        }
+        .carousel-control-prev {
+        top: auto;
+        bottom: auto;
+        padding-top: 222px;
+        }
+        .carousel-control-next {
+        top: auto;
+        bottom: auto;
+        padding-top: 222px;
+        }
+        
+        .carousel-control-next-icon {
+            background: black no-repeat center center;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+
+        }
+        body .carousel-indicators{
+        bottom:0;
+        }
+
+        .carousel-indicators .active{
+        background-color: blue;
+        }
+
+</style>
+{% endblock %}
+
+{% block body %}     
+    
+
+{% load static %}
+        
+
+<!--slideshow starts here -->
+<div class="container">
+
+  <!--Slideshow starts here -->
+  {% for product, range, nslides in allProds %}
+  <br>
+  <h5 class="my-4">{{product.0.category}} - Recommended Items</h5>
+  <div class="row">
+    <!---forloop.counter value startsfrom 1-->
+<div id="demo{{forloop.counter}}" class=" col carousel slide my-3" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+
+     {% for i in range %}
+    <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
+    {% endfor %}
+  </ul>
+
+
+  <div class="container carousel-inner no-padding">
+
+    <div class="carousel-item active">
+
+
+      {% for i in product %}
+      <div class="col-xs-3 col-sm-3 col-md-3">
+        <div class="card align-items-center" style="width: 18rem;">
+          <img src='/media/{{i.image}}' class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title" id='namepr{{i.id}}'>{{i.product_name}}</h5>
+            <p class="card-text">{{i.desc}}</p>
+            <h5 class="card-title">Price : <span id='pricepr{{i.id}}'>{{ i.price }}</span></h5>
+            <span id="divpr{{i.id}}" class='divpr'>
+            <button id="pr{{i.id}}" class="btn btn-primary cart">Add To Cart</button></span>
+            <a href="/shop/product/{{i.id}}"><button id="vp{{i.id}}" class="btn btn-primary cart">View </button></a>
+          </div>
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+    </div><div class="carousel-item">
+      {% endif %}
+
+      {% endfor %}
+  </div>
+
+
+
+</div>
+</div>
+  <!-- left and right controls for the slide -->
+  <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+  {% endfor %}
+</div>
+{% endblock %}
+{% block script %}
+<script>
+{% if msg|length != 0 %}
+alert('{{msg}}');
+window.location.href="/"
+{% endif %}
+
+</script>
+{% endblock %}

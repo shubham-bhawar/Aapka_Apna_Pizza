@@ -1,0 +1,42 @@
+{% extends "blog/basic.html"%}
+{% block title %}  Blog view {% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="row my-3">
+    <div class="col-md-8 blog-main">
+      <h3 class="pb-4 mb-4 font-italic border-bottom">
+        {{prod.title}}
+      </h3>
+
+      <div class="blog-post">
+        <h2 class="blog-post-title">{{prod.head0}}</h2>
+        <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+
+        <p>{{prod.chead0}}</p>
+        <h3>{{prod.head1}}</h3>
+        <p>{{prod.chead1}}</p>
+        <h3>{{prod.head2}}</h3>
+        <p>{{prod.chead2}}</p>
+        
+        
+      </div><!-- /.blog-post -->
+
+    
+
+      
+    </div><!-- /.blog-main -->
+
+    <aside class="col-md-4 blog-sidebar">
+      <div class="p-4 mb-3 bg-light rounded">
+        <h4 class="font-italic">About</h4>
+        <p class="mb-0"><b>AAPKA_APNA_PIZZA</b><em><b> is a Pizza website </b>.</em>You will get the Pizzas at the Cheapest Price and with Best Qualtiy available . Make full use of it . Firt time every this type of deals available on Pizza store online.</p>
+      </div>
+
+
+      
+    </aside><!-- /.blog-sidebar -->
+
+  </div>
+</div>
+{% endblock %}
